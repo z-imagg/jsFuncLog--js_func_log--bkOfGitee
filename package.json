@@ -1,0 +1,6 @@
+{
+  "name": "js_func_log",
+  "version": "1.0",
+  "description": "函数进出日志",
+  "main": "src/_debug_log/_func_log.js"
+}
