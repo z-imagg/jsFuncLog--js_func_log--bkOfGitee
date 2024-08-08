@@ -6,8 +6,9 @@
     "build": "rollup -c"
   },
   "devDependencies": {
-  },
-  "dependencies": {
-    "rollup": "^4.20.0"
+    "@babel/preset-env": "^7.25.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "rollup": "^4.20.0",
+    "rollup-plugin-babel": "^4.4.0"
   }
 }
