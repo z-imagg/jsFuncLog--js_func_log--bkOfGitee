@@ -4,12 +4,31 @@
 // import resolve from '@rollup/plugin-node-resolve';
 // import commonjs from '@rollup/plugin-commonjs';
 // import { terser } from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+
 
 // `npm run build` -> `production` is true
 // `npm run dev` -> `production` is false
 // const production = !process.env.ROLLUP_WATCH;
 
 const input/* :string */= 'src/_debug_log/_func_log.js'
+
+const babel_plgin_cfg=    babel({
+	exclude: 'node_modules/**', // 排除 node_modules 目录
+	babelHelpers: 'bundled', // 使用打包的 Babel 助手函数
+	presets: [
+		[
+			"@babel/preset-env",
+			{
+				targets: {
+					"ie": "11" // 设置目标环境为至少支持到 IE11
+				},
+				modules: false // 让 Rollup 处理模块而不是 Babel
+			}
+		]
+	]
+})
+;
 
 export default [
 {
@@ -22,6 +41,7 @@ export default [
 	plugins: [
 		// resolve(), // tells Rollup how to find date-fns in node_modules
 		// commonjs(), // converts date-fns to ES modules
+		babel_plgin_cfg
 	]
 },
 
@@ -34,6 +54,7 @@ export default [
 		sourcemap: true
 	},
 	plugins: [
+		babel_plgin_cfg
 	]
 },
 
@@ -45,6 +66,7 @@ export default [
 		format: 'es'
 	},
 	plugins: [
+		babel_plgin_cfg
 	]
 },
 
@@ -56,6 +78,7 @@ export default [
 		format: 'cjs'
 	},
 	plugins: [
+		babel_plgin_cfg
 	]
 },
 ];
