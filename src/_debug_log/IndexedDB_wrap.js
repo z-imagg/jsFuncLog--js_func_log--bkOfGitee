@@ -2,37 +2,47 @@
 // https://github.com/dexie/Dexie.js
 
 export function loadDexie() {
-  var script = document.createElement('script');
-  script.src = 'https://unpkg.com/dexie/dist/dexie.js';
-  script.onload = function() {
-    console.log('Dexie loaded successfully');
-    // 在这里调用 Dexie 相关的代码
-  };
-  script.onerror = function() {
-    console.error('Failed to load Dexie');
-  };
-  document.head.appendChild(script);
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/dexie/dist/dexie.js';
+    script.onload = () => {
+      console.log('Dexie loaded successfully');
+      resolve();
+    };
+    script.onerror = () => {
+      console.error('Failed to load Dexie');
+      reject(new Error('Script load failed'));
+    };
+    document.head.appendChild(script);
+  });
 }
 
 function createDb_IndexedDB(){
-  loadDexie()
 
-  const db_FuncLog = window.db_FuncLog = new Dexie('db_FuncLog');
-  db_FuncLog.version(1).stores({
-    tab_funcLog: '++id, direction,srcFile,method,args,ret'
-  });
+
+
 
 
 }
 
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
-  if(!window.db_FuncLog){
+
+
+  loadDexie().then(() => {
+    
     createDb_IndexedDB()
-  }
-  if(window.db_FuncLog){
+
+    const db_FuncLog = window.db_FuncLog = new Dexie('db_FuncLog');
+    // db_FuncLog.version(1).stores({
+    //   tab_funcLog: '++id, direction,srcFile,method,args,ret'
+    // });
+
     window.db_FuncLog.add({ direction, srcFile,method,args:null,ret:null});
     // window.db_FuncLog.add({ direction: 'func_enter', srcFile:'src/collection/dimensions/bounds.js',method:'elesfn.getKey',args:null,ret:null});
 
-  }
+
+  }).catch(error => {
+    console.error(error);
+  });
 
 }
