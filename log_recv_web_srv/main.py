@@ -21,7 +21,7 @@ g_threaLock=threading.Lock()
 def write_file__with_ThreadLock( text:str):
   global g_threaLock,g_logFile
   #加锁
-  getLockOk:bool=g_threaLock.acquire(blocking=True,timeout=2)
+  getLockOk:bool=g_threaLock.acquire(blocking=True,timeout=30)
   if not getLockOk:
     raise Exception(f"write_file__with_ThreadLock,获取线程锁失败, logFilePath={g_logFile}")
   
@@ -40,6 +40,7 @@ def write_file__with_ThreadLock( text:str):
   #end_func write_file__with_ThreadLock
 
 def _openFile_ifNone__noThreadLock():
+  global g_logFile
   if g_logFile is None: 
     g_logFile=open("_func_log.txt","+a")
 
