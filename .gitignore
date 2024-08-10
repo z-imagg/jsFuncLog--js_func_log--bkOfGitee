@@ -8,3 +8,7 @@ public/build/
 
 
 build/
+
+log_recv_web_srv/.venv/
+
+log_recv_web_srv/_func_log.txt
