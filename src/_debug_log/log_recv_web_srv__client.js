@@ -1,20 +1,20 @@
 //函数日志接受web服务 客户端
 
-function httpReq(url/* :string */, method/* :string */,req_body/* :string|undefined */  )/* : Promise< {ok,response,error} > */{
+function httpReq(url/* :string */, method/* :string */,text_ls/* :string[]|undefined */  )/* : Promise< {ok,response,error} > */{
 
 const req/* : RequestInit */ = {
   method: method, // 'POST', 'GET'
   headers: {
-      'Content-Type': 'text/plain'
+      'Content-Type': 'application/json'
   },
-  body: req_body // 发送的数据
+  body: text_ls // 发送的数据
 };
 return fetch(url, req)
 .then(response => {
     if (response.ok) {
       return {ok:true, response,error:undefined}
     }
-    console.error(`请求出错1,url=${url},req_body=${req_body},resp=${response}`);
+    console.error(`请求出错1,url=${url},text_ls=${text_ls},resp=${response}`);
     return {ok:false, response,error:undefined}
 })
 // .then(data => {
@@ -30,10 +30,26 @@ const writeLine_url=`${log_recv_web_srv_url}/funcLogFile/writeLine`
 const close_url=`${log_recv_web_srv_url}/funcLogFile/close`
 const POST='POST'
 const GET='GET'
-export function writeLine_funcLogFile(text/* :string */, proc){
-  // httpReq(POST,_url,text ) .then((ok,response,error) => {  })
-  const _proimse=httpReq(writeLine_url,POST,text )
-  if(proc){  _proimse.then(proc)  }
+let textLs_swap/* :string[] */=[]
+const swap_size/* :number */=200
+export function writeLine_funcLogFile(text/* :string */){
+  textLs_swap.push(text)
+  if(textLs_swap.length>=swap_size){
+    const _textLs_swap=textLs_swap
+    textLs_swap=[]
+    setTimeout(function(){
+      writeLineLs_funcLogFile(_textLs_swap)
+    }, 1)
+    
+  }
+}
+
+function writeLineLs_funcLogFile(text_ls/* :string[] */ ){
+  // httpReq(POST,_url,text_ls ) .then((ok,response,error) => {  })
+  httpReq(writeLine_url,POST,text_ls )
+  .then((ok,response,error) => {
+
+   })
 }
 
 export function close_funcLogFile(proc){

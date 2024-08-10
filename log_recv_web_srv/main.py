@@ -75,17 +75,16 @@ def close_file__with_ThreadLock( ):
 @app.route('/funcLogFile/writeLine', methods=['POST' ] )
 def _writeLine_funcLogFile():
   print("@@@write_func_log")
-  # if request.content_type != "application/json":
-  #     return "err__content_type_notJson",401
-  # if not request.json or not request.is_json:
-  #     return "err__notJson",402
+  if request.content_type != "application/json":
+      return "err__content_type_notJson",401
+  if not request.json or not request.is_json:
+      return "err__notJson",402
 
-  req_body:bytes=request.data
+  text_ls:typing.List[str]=request.json
   # msg:str=f"req.body=#{req_body}#,req.content_type=#{request.content_type}#"
   # print(msg)
-  text:str=req_body.decode("utf-8")
-  text=f"{text}\n"
-  write_file__with_ThreadLock(text)
+  Text:str=[f"{lineK}\n" for lineK in text_ls  ]
+  write_file__with_ThreadLock(Text)
   return "write_funcLogFile", 201
 
 @app.route('/funcLogFile/close', methods=['GET' ] )
