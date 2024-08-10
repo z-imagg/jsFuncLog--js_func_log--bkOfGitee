@@ -16,19 +16,4 @@ source $PyVenvDir/bin/activate
 
 pip install -r requirements.txt
 
-python main.py &
-
-sleep 1
-
-#写文件测试
-http POST localhost:5001/funcLogFile/writeLine --raw trash,direction,srcFile,method,args,ret
-http --raw 'xxx.js,func_enter,src/collection/dimensions/bounds.js,elesfn.getKey,{"arg1":11},"retVal"' POST localhost:5001/funcLogFile/writeLine #上一行的等价写法
-# http --json  POST localhost:5001/funcLogFile/writeLine     name=zhangsan
-# http POST localhost:5001/funcLogFile/writeLine Content-Type:application/json    name="zhangsan"
-#关闭文件测试
-http GET localhost:5001/funcLogFile/close  
-
-ls -lh 
-cat -n _func_log.txt
-
-kill `pidof python`
+python main.py
