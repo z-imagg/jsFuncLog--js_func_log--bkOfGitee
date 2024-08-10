@@ -4,9 +4,13 @@
 
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
 
-
     
-    window.db_FuncLog.tab_funcLog.add({ direction, srcFile,method,args:null,ret:null});
+    window.db_FuncLog.tab_funcLog.add({ direction, srcFile,method,args:null,ret:null}).then((id) => {
+      window.db_FuncLog.tab_funcLog._debugVar_rowCnt++;
+      if(window.db_FuncLog.tab_funcLog._debugVar_rowCnt<100){
+        console.log(`writeFuncLog_IndexedDB,id=${id},window.db_FuncLog.tab_funcLog.count=${window.db_FuncLog.tab_funcLog.count()}`);
+      }
+    })
     // window.db_FuncLog.tab_funcLog.add({ direction: 'func_enter', srcFile:'src/collection/dimensions/bounds.js',method:'elesfn.getKey',args:null,ret:null});
 
 
