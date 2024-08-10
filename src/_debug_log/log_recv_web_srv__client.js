@@ -26,16 +26,18 @@ return fetch(url, req)
 });
 }
 const log_recv_web_srv_url="http://localhost:5001"
+const writeLine_url=`${log_recv_web_srv_url}/funcLogFile/writeLine`
+const close_url=`${log_recv_web_srv_url}/funcLogFile/close`
 const POST='POST'
 const GET='GET'
 export function writeLine_funcLogFile(text/* :string */, proc){
   // httpReq(POST,_url,text ) .then((ok,response,error) => {  })
-  const _proimse=httpReq(log_recv_web_srv_url,POST,text )
+  const _proimse=httpReq(writeLine_url,POST,text )
   if(proc){  _proimse.then(proc)  }
 }
 
 export function close_funcLogFile(proc){
   // httpReq(GET,_url ) .then((ok,response,error) => {  })
-  const _proimse=httpReq(log_recv_web_srv_url,GET,undefined )
+  const _proimse=httpReq(close_url,GET,undefined )
   if(proc){  _proimse.then(proc)  }
 }
