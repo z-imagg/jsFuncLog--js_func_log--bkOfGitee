@@ -1,6 +1,7 @@
 //函数进入、返回打印日志
 
 import { isIgnore_methodFullName,printLog_argsWhenFuncRet} from './_func_log_cfg.js'
+import {createDb_IndexedDB,writeFuncLog_IndexedDB} from './IndexedDB_wrap.js'
 
 //对象转json文本包装函数(因为该过程可能报错)
 function _JSON_stringify_wrap(obj/* :any */)/* :string */{
@@ -40,8 +41,7 @@ export function   _func_enter_log(srcFilePath/* :string */,classMethodName/* :st
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
   }
-  const msg/* :string */=`#@func_enter#@${srcFilePath}#@${classMethodName}#@#@`;
-  console.log(msg)
+  writeFuncLog_IndexedDB('func_enter',srcFilePath,classMethodName)
 // console.log(`#@enter#@WebCola/src/adaptor.ts:LayoutAdaptor.trigger:args_json=[e=[${_JSON_stringify_wrap(e)}]]`)
 }
 //无参函数进入 打印日志
@@ -54,8 +54,8 @@ export function   _func_return_log(srcFilePath/* :string */,classMethodName/* :s
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
   }
-  let msg/* :string */=`#@func_return#@${srcFilePath}#@${classMethodName}#@#@${_JSON_stringify_wrap(ret_val)}`;
-  console.log(msg)
+  // let msg/* :string */=`#@func_return#@${srcFilePath}#@${classMethodName}#@#@${_JSON_stringify_wrap(ret_val)}`;
+  writeFuncLog_IndexedDB('func_return',srcFilePath,classMethodName)
 // console.log(`#@return#@WebCola/src/adaptor.ts:LayoutAdaptor.trigger:args_json=[e=[${_JSON_stringify_wrap(e)}]]:ret_json=${_JSON_stringify_wrap(ret)}`)
 }
 
