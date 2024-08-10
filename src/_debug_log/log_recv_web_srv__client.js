@@ -14,14 +14,14 @@ return fetch(url, req)
     if (response.ok) {
       return {ok:true, response}
     }
-    console.error(`请求出错1,url=${url},req_body=${text},resp=${response}`);
+    console.error(`请求出错1,url=${url},req_body=${req_body},resp=${response}`);
     return {ok:false, response}
 })
 // .then(data => {
 //     console.log(data);
 // })
 .catch(error => {
-  console.error(`请求出错2,url=${url},req_body=${text},resp=${response}`);
+  console.error(`请求出错2,url=${url},req_body=${req_body},resp=${response}`);
   return {ok:false, response,error}
 });
 }
