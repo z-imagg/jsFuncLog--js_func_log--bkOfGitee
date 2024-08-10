@@ -1,7 +1,7 @@
 // 运行时动态加载 Dexie.js(IndexedDB包裹)， 以避开将dexie.js打包进此项目js编译产物(从而避开es版本差异等各种坑)
 // https://github.com/dexie/Dexie.js
 
-function loadDexie() {
+export function loadDexie() {
   var script = document.createElement('script');
   script.src = 'https://unpkg.com/dexie/dist/dexie.js';
   script.onload = function() {
