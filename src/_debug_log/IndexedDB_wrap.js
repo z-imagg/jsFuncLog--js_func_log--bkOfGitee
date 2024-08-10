@@ -14,7 +14,7 @@ function loadDexie() {
   document.head.appendChild(script);
 }
 
-export function createDb_IndexedDB(){
+function createDb_IndexedDB(){
   loadDexie()
 
   const db_FuncLog = window.db_FuncLog = new Dexie('db_FuncLog');
@@ -26,7 +26,9 @@ export function createDb_IndexedDB(){
 }
 
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
-
+  if(!window.db_FuncLog){
+    createDb_IndexedDB()
+  }
   if(window.db_FuncLog){
     window.db_FuncLog.add({ direction, srcFile,method,args:null,ret:null});
     // window.db_FuncLog.add({ direction: 'func_enter', srcFile:'src/collection/dimensions/bounds.js',method:'elesfn.getKey',args:null,ret:null});
