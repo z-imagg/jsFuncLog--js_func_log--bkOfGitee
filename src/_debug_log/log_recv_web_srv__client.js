@@ -12,17 +12,17 @@ const req/* : RequestInit */ = {
 return fetch(url, req)
 .then(response => {
     if (response.ok) {
-      return {ok:true, response}
+      return {ok:true, response,error:undefined}
     }
     console.error(`请求出错1,url=${url},req_body=${req_body},resp=${response}`);
-    return {ok:false, response}
+    return {ok:false, response,error:undefined}
 })
 // .then(data => {
 //     console.log(data);
 // })
 .catch(error => {
-  console.error(`请求出错2,url=${url},req_body=${req_body},resp=${response}`);
-  return {ok:false, response,error}
+  console.error(`请求出错2,url=${url},error=${error}`);
+  return {ok:false, response:undefined,error}
 });
 }
 const _url="http://localhost:5001"
