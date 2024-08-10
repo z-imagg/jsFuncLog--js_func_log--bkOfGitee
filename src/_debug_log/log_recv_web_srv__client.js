@@ -25,17 +25,17 @@ return fetch(url, req)
   return {ok:false, response:undefined,error}
 });
 }
-const _url="http://localhost:5001"
+const log_recv_web_srv_url="http://localhost:5001"
 const POST='POST'
 const GET='GET'
 export function writeLine_funcLogFile(text/* :string */, proc){
   // httpReq(POST,_url,text ) .then((ok,response,error) => {  })
-  const _proimse=httpReq(POST,_url,text )
+  const _proimse=httpReq(log_recv_web_srv_url,POST,text )
   if(proc){  _proimse.then(proc)  }
 }
 
 export function close_funcLogFile(proc){
   // httpReq(GET,_url ) .then((ok,response,error) => {  })
-  const _proimse=httpReq(GET,_url )
+  const _proimse=httpReq(log_recv_web_srv_url,GET,undefined )
   if(proc){  _proimse.then(proc)  }
 }
