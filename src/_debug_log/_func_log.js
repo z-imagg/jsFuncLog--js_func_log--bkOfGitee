@@ -1,7 +1,7 @@
 //函数进入、返回打印日志
 
 import { isIgnore_methodFullName,printLog_argsWhenFuncRet} from './_func_log_cfg.js'
-import {createDb_IndexedDB,writeFuncLog_IndexedDB} from './IndexedDB_wrap.js'
+import {writeFuncLog_IndexedDB} from './IndexedDB_wrap.js'
 
 //对象转json文本包装函数(因为该过程可能报错)
 function _JSON_stringify_wrap(obj/* :any */)/* :string */{
