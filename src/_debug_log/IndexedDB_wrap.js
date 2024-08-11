@@ -9,7 +9,7 @@ function probability__eq__0_div__relative_us_modNum(relative_us,us_modNum/* :int
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
   const relative_us=window.performance.now() 
   // 以 1/relative_us_modNum 的概率,执行此函数的业务(writeFuncLog_IndexedDB)
-  if(probability__eq__0_div__relative_us_modNum(relative_us,window._debugVar.relative_us_modNum?1000:window._debugVar.relative_us_modNum)){
+  if(probability__eq__0_div__relative_us_modNum(relative_us,window._debugVar.relative_us_modNum )){
     
     const tab_funcLog=window.db_FuncLog.tab_funcLog;
     
@@ -17,9 +17,9 @@ export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string
     if(debugDiv){
       const cur_ms=new Date().valueOf()
       const delta_ms=cur_ms-window._debugVar.start_ms
-      const delta_s=parseInt(delta_ms/1000)
+      // const delta_s=parseInt(delta_ms/1000)
       // const rowCnt_w=parseInt(window._debugVar._rowCnt/10000)
-      debugDiv.textContent=`${delta_s}秒, ${window._debugVar._rowCnt}行`;
+      debugDiv.textContent=`${delta_ms}毫秒, ${window._debugVar._rowCnt}行`;
     }
 
     window._debugVar._rowCnt++;
