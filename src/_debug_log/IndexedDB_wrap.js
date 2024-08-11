@@ -34,3 +34,19 @@ export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string
 
 
 }
+
+//概率地打日志以缩小日志量,从而能看到目标执行的全貌
+//猜测 由于 浏览器的当前微秒数 window.performance.now()  不是完全实时更新的, 导致 概率不是很准, 但 概率依然能够起到缩小日志量的作用.
+
+//firefox-v129.0-64bit 执行结果如下:
+//概率=1/3, 1182毫秒, 9310行
+//概率=1/2, 1671毫秒, 19906行
+//概率=1/1, 29秒,     27万行 (firefox进程吃内存8GB) (此数值并非重点,还在继续执行,只是页面停止更新而看不到数值了)  //fire的 当前微秒数 window.performance.now()  比较忠诚
+
+//chromium-v127.0.6533.88-snap-64bit 执行结果如下:
+// 概率=1/4, 750毫秒, 217行
+// 概率=1/3, 712毫秒, 417行
+// 概率=1/2, 687毫秒, 425行
+// 概率=1/1, 773毫秒, 1721行  //chromium的 当前微秒数 window.performance.now()  太不忠诚
+
+//可见 firefox比chromium忠诚, 所以应该用firefox
