@@ -7,18 +7,24 @@ function probability(val/* :float */)/* :boolean */{
   return yes;
 }
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
+  let _prob_my = localStorage.getItem("_prob_my")
+  const _prob_val=_prob_my?parseFloat(_prob_my):0.9999999999999
   //99.9%的概率,不执行此函数的业务(writeFuncLog_IndexedDB)
-  if(!probability(0.9999999999999)){
+  if(!probability(_prob_val)){
     return;
   }
     const tab_funcLog=window.db_FuncLog.tab_funcLog;
 
     const debugDiv = document.getElementById("id_debugDiv")
     if(debugDiv){
-      debugDiv.textContent=tab_funcLog._debugVar_rowCnt;
+      const cur_ms=new Date().valueOf()
+      const delta_ms=cur_ms-window._debugVar.start_ms
+      const delta_s=parseInt(delta_ms/1000)
+      const rowCnt_w=parseInt(window._debugVar._rowCnt/10000)
+      debugDiv.textContent=`${delta_s}秒, ${rowCnt_w}万行`;
     }
 
-    tab_funcLog._debugVar_rowCnt++;
+    window._debugVar._rowCnt++;
     tab_funcLog.add({ direction, srcFile,method,args:null,ret:null}).then((id) => {
     })
 
