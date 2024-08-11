@@ -8,21 +8,19 @@ function probability(val/* :float */)/* :boolean */{
 }
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
   //99.9%的概率,不执行此函数的业务(writeFuncLog_IndexedDB)
-  if(!probability(0.999)){
+  if(!probability(0.9999999999999)){
     return;
   }
-
     const tab_funcLog=window.db_FuncLog.tab_funcLog;
+
+    const debugDiv = document.getElementById("id_debugDiv")
+    if(debugDiv){
+      debugDiv.textContent=tab_funcLog._debugVar_rowCnt;
+    }
+
     tab_funcLog._debugVar_rowCnt++;
     tab_funcLog.add({ direction, srcFile,method,args:null,ret:null}).then((id) => {
-      if(tab_funcLog._debugVar_rowCnt<100){
-        console.log(`writeFuncLog_IndexedDB,id=${id} `);
-        tab_funcLog.where('id').equals(id).toArray().then((x)=>{
-          console.log(x)
-        });
-      }
     })
-    // tab_funcLog.add({ direction: 'func_enter', srcFile:'src/collection/dimensions/bounds.js',method:'elesfn.getKey',args:null,ret:null});
 
 
 }
