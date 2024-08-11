@@ -18,8 +18,8 @@ export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string
       const cur_ms=new Date().valueOf()
       const delta_ms=cur_ms-window._debugVar.start_ms
       const delta_s=parseInt(delta_ms/1000)
-      const rowCnt_w=parseInt(window._debugVar._rowCnt/10000)
-      debugDiv.textContent=`${delta_s}秒, ${rowCnt_w}万行`;
+      // const rowCnt_w=parseInt(window._debugVar._rowCnt/10000)
+      debugDiv.textContent=`${delta_s}秒, ${window._debugVar._rowCnt}行`;
     }
 
     window._debugVar._rowCnt++;
@@ -27,7 +27,10 @@ export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string
     })
 
   }//end_if
-
+  else{
+    //概率否定（调试用）
+    const _debug_dummy = 0;
+  }
 
 
 }
