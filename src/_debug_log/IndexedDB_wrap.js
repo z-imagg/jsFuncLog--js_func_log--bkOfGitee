@@ -19,7 +19,7 @@ export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string
       const delta_ms=cur_ms-window._debugVar.start_ms
       // const delta_s=parseInt(delta_ms/1000)
       // const rowCnt_w=parseInt(window._debugVar._rowCnt/10000)
-      debugDiv.textContent=`${delta_ms}毫秒, ${window._debugVar._rowCnt}行`;
+      debugDiv.textContent=`概率=1/${window._debugVar.relative_us_modNum}, ${delta_ms}毫秒, ${window._debugVar._rowCnt}行`;
     }
 
     window._debugVar._rowCnt++;
