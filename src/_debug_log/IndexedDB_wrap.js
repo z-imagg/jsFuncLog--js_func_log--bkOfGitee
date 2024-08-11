@@ -8,10 +8,8 @@ function probability(val/* :float */)/* :boolean */{
 }
 export function writeFuncLog_IndexedDB(direction/* :string */, srcFile/* :string */, method/* :string */){
   // 概率 0.99999999999,  31秒 , 19万行日志
-  let _prob_my = localStorage.getItem("_prob_my")
-  const _prob_val=_prob_my?parseFloat(_prob_my):0.9999999999999
   //99.9%的概率,不执行此函数的业务(writeFuncLog_IndexedDB)
-  if(!probability(_prob_val)){
+  if(!probability(window._debugVar._probaVal)){
     return;
   }
     const tab_funcLog=window.db_FuncLog.tab_funcLog;
