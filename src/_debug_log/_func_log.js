@@ -36,7 +36,7 @@ function _argDict_jsonText(arg_dict/* :_Arg_Dict|null */){
 }
 
 
-//函数进入 打印日志
+//函数进入 打印日志 (函数入参arg_dict不保存)
 export function   _func_enter_log(srcFilePath/* :string */,classMethodName/* :string */,arg_dict/* :_Arg_Dict|null */ ){
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
@@ -49,12 +49,11 @@ export function   _funcNoArgs_enter_log(srcFilePath/* :string */,classMethodName
   _func_enter_log(srcFilePath,classMethodName,null)
 }
 
-//函数返回 打印日志
+//函数返回 打印日志 (函数入参arg_dict、函数返回值ret_val 不保存)
 export function   _func_return_log(srcFilePath/* :string */,classMethodName/* :string */,arg_dict/* :_Arg_Dict */,ret_val/* :any|null */){
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
   }
-  // let msg/* :string */=`#@func_return#@${srcFilePath}#@${classMethodName}#@#@${_JSON_stringify_wrap(ret_val)}`;
   writeFuncLog_IndexedDB('func_return',srcFilePath,classMethodName)
 // console.log(`#@return#@WebCola/src/adaptor.ts:LayoutAdaptor.trigger:args_json=[e=[${_JSON_stringify_wrap(e)}]]:ret_json=${_JSON_stringify_wrap(ret)}`)
 }
