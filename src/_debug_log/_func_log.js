@@ -1,6 +1,7 @@
 //函数进入、返回打印日志
 
 import { isIgnore_methodFullName,printLog_argsWhenFuncRet} from './_func_log_cfg.js'
+import {writeFuncLog_IndexedDB} from './IndexedDB_wrap.js'
 
 //对象转json文本包装函数(因为该过程可能报错)
 function _JSON_stringify_wrap(obj/* :any */)/* :string */{
@@ -35,13 +36,12 @@ function _argDict_jsonText(arg_dict/* :_Arg_Dict|null */){
 }
 
 
-//函数进入 打印日志
+//函数进入 打印日志 (函数入参arg_dict不保存)
 export function   _func_enter_log(srcFilePath/* :string */,classMethodName/* :string */,arg_dict/* :_Arg_Dict|null */ ){
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
   }
-  const msg/* :string */=`#@func_enter#@${srcFilePath}#@${classMethodName}#@#@`;
-  console.log(msg)
+  writeFuncLog_IndexedDB('func_enter',srcFilePath,classMethodName)
 // console.log(`#@enter#@WebCola/src/adaptor.ts:LayoutAdaptor.trigger:args_json=[e=[${_JSON_stringify_wrap(e)}]]`)
 }
 //无参函数进入 打印日志
@@ -49,13 +49,12 @@ export function   _funcNoArgs_enter_log(srcFilePath/* :string */,classMethodName
   _func_enter_log(srcFilePath,classMethodName,null)
 }
 
-//函数返回 打印日志
+//函数返回 打印日志 (函数入参arg_dict、函数返回值ret_val 不保存)
 export function   _func_return_log(srcFilePath/* :string */,classMethodName/* :string */,arg_dict/* :_Arg_Dict */,ret_val/* :any|null */){
   if(isIgnore_methodFullName(srcFilePath,classMethodName)){
     return;
   }
-  let msg/* :string */=`#@func_return#@${srcFilePath}#@${classMethodName}#@#@${_JSON_stringify_wrap(ret_val)}`;
-  console.log(msg)
+  writeFuncLog_IndexedDB('func_return',srcFilePath,classMethodName)
 // console.log(`#@return#@WebCola/src/adaptor.ts:LayoutAdaptor.trigger:args_json=[e=[${_JSON_stringify_wrap(e)}]]:ret_json=${_JSON_stringify_wrap(ret)}`)
 }
 
