@@ -1,0 +1,10 @@
+
+node_modules/
+dist/
+public/build/
+.node_env_*/
+.pnpm_home/
+.idea/
+
+
+build/
